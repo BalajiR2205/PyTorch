@@ -1,5 +1,4 @@
 import torch
-from sympy.codegen.fnodes import dimension
 
 #MANUPULATING TENSORS
 
@@ -41,16 +40,19 @@ print(f"Shape of fruit matrix: {fruit_matrix.shape}")
 
 #print(cost_matrix.ndimension())
 #print(cost_matrix * fruit_matrix)
-#print(torch.matmul(cost_matrix, fruit_matrix))
-# dimension: (3) * (4, 3)
+
+#print(torch.matmul(cost_matrix, fruit_matrix)) #Won't work because the inner dimension won't match # [3] @ [3, 4] = [4]
+
+
+#dimension: (3) * (4, 3)
 
 # print(cost_matrix.dot(fruit_matrix))
 
-print(torch.matmul(fruit_matrix, cost_matrix))
+print(torch.matmul(fruit_matrix, cost_matrix)) ## [4, 3] @ [3] = [4] - Works!
 
 #print(torch.mm(cost_matrix, fruit_matrix))
 
-#imension: (4, 3) * (3)
+#dimension: (4, 3) * (3)
 
 tensor_a = torch.tensor([[1,2],[3,4],[5,6]])
 
@@ -60,8 +62,31 @@ tensor_b = torch.tensor([[7,8],[9,10],[11,12]])
 
 #To fix tensor shape issue we can use transpose. It transposes the matrix (Re-arranges)
 
+#Transpose flips a matrix along its diagonal. rows become columns and columns become rows.
+
 print(tensor_b.shape)
 print(tensor_b.T.shape)
+
+# Visualizing fruit_matrix:
+#
+# Original [4, 3]:
+# Row 0: [13,  8,  6]
+# Row 1: [ 9,  7,  4]
+# Row 2: [ 7,  4,  0]
+# Row 3: [15,  6,  3]
+
+fruit_matrix_T = fruit_matrix.T  # or fruit_matrix.transpose(0, 1)
+print(fruit_matrix_T.shape)
+
+# Transposed [3, 4]:
+# Row 0: [13,  9,  7, 15]  # Original column 0 became row 0
+# Row 1: [ 8,  7,  4,  6]  # Original column 1 became row 1
+# Row 2: [ 6,  4,  0,  3]  # Original column 2 became row 2
+#
+# cost_matrix @ fruit_matrix.T
+# [3, 4, 2] @ [[13, 9, 7, 15],   # [3] @ [3,4] → [1,3] @ [3,4] ✅
+#              [8, 7, 4, 6],      # Inner dimensions: 3 = 3
+#              [6, 4, 0, 3]]      # Result shape: [4]
 
 
 

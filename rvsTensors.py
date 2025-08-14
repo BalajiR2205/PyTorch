@@ -1,4 +1,5 @@
 import torch
+from mpmath.matrices.matrices import rowsep
 
 #   RESHAPING, VIEWING, squeezing, unsqueezing, STACKING TENSORS AND INDEXING
 
@@ -26,13 +27,16 @@ print(z, z.shape)
 
 #Changing z changes x (Because a view of a tensor shares the same memory as the original input)
 
-z[:, 0] = 5
+z[:, 0] = 5 # : and 0 are just rows and columns you can either give 2:5 3:5 here :,0 means all rows 0 column
 print(x, z)
 
 #Stack tensors on top of each other
 
 x_stacked = torch.stack([x, x, x, x], dim=0)
 print(x_stacked)
+
+# dim=0 - creates rows
+# dim=1 - creates columns
 
 #Squeeze and unsqueezing
 
@@ -54,6 +58,7 @@ print(f"After unsqueezing {x_unsqueezed} and shape: {x_unsqueezed.shape}")
 x_original = torch.rand(size=(224,224,3)) #Height, width and color_channel
 
 #permute the original tensor to rearrange the axis order
+# Permute dimensions: swap rows and columns # Swap dim 0 and dim 1
 x_permuted = x_original.permute(2, 0, 1) #shifts axis to 0->1, 1->2, 2->0
 
 #print(f"X_original: {x_original}")
@@ -73,6 +78,25 @@ print(x[0, 0, 2]) #>>> 1
 print(x[0, 2, 2])
 
 print(x[0, 2])
+
+# Permute vs Transpose
+#
+# transpose(): Only swaps 2 dimensions
+# permute(): Can rearrange any number of dimensions in any order
+
+# x = torch.randn(2, 3, 4)
+# x.transpose(0, 1)    # Only swaps dims 0 and 1: [3, 2, 4]
+# x.permute(1, 0, 2)   # Same result but more explicit: [3, 2, 4]
+# x.permute(2, 1, 0)   # More complex rearrangement: [4, 3, 2]
+
+# randn vs rand
+
+# randn - Values can be negative or positive
+# rand - All values in [0, 1) are equally likely and Always positive.
+
+
+
+
 
 
 

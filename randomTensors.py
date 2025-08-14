@@ -35,6 +35,12 @@ print(ones.dtype)  # default data type is FLOAT
 
 range_tensor = torch.arange(0, 11, 1)
 
+#0 - Start
+#1 - End
+#1 - Step size (increment)
+
+print(f"Range tensor: {range_tensor}")
+
 #TENSOR-LIKE
 
 ten_zeroes = range_tensor.zero_()

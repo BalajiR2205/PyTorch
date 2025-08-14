@@ -2,7 +2,7 @@ import torch
 from torch import nn #nn contains all of pyTorch building blocks of neural networks.
 import matplotlib.pyplot as plt
 
-what_were_covering = {1: "data (prepare and load",
+what_were_covering = {1: "data (prepare and load)",
                       2: "build model",
                       3: "fitting the model to data (training)",
                       4: "making predictions and evaluating a model (inference)",
@@ -19,8 +19,8 @@ what_were_covering = {1: "data (prepare and load",
 # 2. Build a model to learn patterns in the numerical representation
 
 #Create known parameters
-weight = 0.7
-bias = 0.3
+weight = 0.7 #Weight controls how much influence one input has on the output.
+bias = 0.3 #Bias is like a baseline adjustment - it shifts the output up or down regardless of the input.
 
 # Create data
 start = 0
@@ -66,7 +66,7 @@ def plot_prediction(train_data=X_train,
 
     if prediction is not None:
         #plot the predictions if they exist
-        plt.scatter(test_data, prediction, c="r", s=4, lable="prediction")
+        plt.scatter(test_data, prediction, c="r", s=4, label="prediction")
         #plt.show()
 
     plt.legend(prop={"size": 14})
